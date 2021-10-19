@@ -1,12 +1,17 @@
 import "./App.css";
 import { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+// helpers
+import api from "./helpers/api";
+import { useAuth } from "./helpers/AuthContext";
 // pages
 import Login from "./pages/Login";
 import DashBoard from "./pages/Dashboard";
-import { useAuth } from "./helpers/AuthContext";
-import { useHistory } from "react-router-dom";
-import api from "./helpers/api";
+// components
+import SideMenu from "./components/themes/SideMenu";
+import MainContent from "./components/themes/MainContent";
+import styled from "styled-components";
 
 function App() {
   const history = useHistory();
@@ -42,29 +47,23 @@ function App() {
     }
   }, []);
 
-  const logOut = () => {
-    localStorage.removeItem("apiKey");
-    setAuthState({
-      username: "",
-      id: 0,
-      status: false,
-    });
-    history.push("/");
-  };
-
   return (
-    <div className="App">
-      <div>
-        <p>{authState.username}</p>
-        {authState.status && <button onClick={logOut}>Logout</button>}
-      </div>
-
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/dashboard" component={DashBoard} />
-      </Switch>
-    </div>
+    <AppWrapper>
+      <SideMenu />
+      <MainContent>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/dashboard" component={DashBoard} />
+        </Switch>
+      </MainContent>
+    </AppWrapper>
   );
 }
 
 export default App;
+
+const AppWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "sideMenu mainContent";
+`;
