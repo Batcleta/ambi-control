@@ -2,8 +2,10 @@ const { verify } = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
   const apiKey = req.header("apiKey");
+  // const username = req.header("username");
 
   if (!apiKey) return res.json({ error: "user not logged in" });
+  // if (!username) return res.json({ error: "user not logged in" });
 
   try {
     const validToken = verify(apiKey, "importantsecret");

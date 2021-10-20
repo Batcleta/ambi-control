@@ -1,6 +1,8 @@
 const { LICENCAS_CLIENTE } = require("../models");
 const Clients = LICENCAS_CLIENTE;
 
+const Op = require("sequelize").Op;
+
 const SerialGenerator = require("../middlewares/SerialGenerator");
 
 module.exports = {
@@ -33,8 +35,11 @@ module.exports = {
   },
   async findAll(req, res) {
     // paginação
-    const { page } = req.query; //passar no params
-    const pageSize = 10; //passar como parametro
+    const { page } = req.query;
+    const { search } = req.query;
+
+    const pageSize = 10;
+
     // Convertando os valores recebidos
     const getPagination = (page, size) => {
       const limit = size ? +size : 10;
@@ -49,13 +54,17 @@ module.exports = {
       const { count: totalItems, rows: clients } = data;
       const currentPage = page ? +page : 0;
       const totalPages = Math.ceil(totalItems / limit);
-      return { totalItems, clients, totalPages, currentPage };
+      return {
+        totalItems,
+        clients,
+        totalPages,
+        currentPage,
+      };
     };
 
     // pesquisa
-    const { pesquisa } = req.params;
-    let condition = pesquisa
-      ? { RAZAO_SOCIAL: { [Op.like]: `%${pesquisa}%` } }
+    let condition = search
+      ? { RAZAO_SOCIAL: { [Op.like]: `%${search}%` } }
       : null;
 
     Clients.findAndCountAll({

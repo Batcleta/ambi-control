@@ -4,7 +4,10 @@ import { useState } from "react";
 const AuthContext = createContext("");
 
 export default function AuthProvider({ children }) {
-  const [page, changePage] = useState(1);
+  const [page, changePage] = useState({
+    currentPage: 1,
+    totalPages: [],
+  });
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
