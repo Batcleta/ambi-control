@@ -8,10 +8,13 @@ import { useAuth } from "./helpers/AuthContext";
 // pages
 import Login from "./pages/Login";
 import DashBoard from "./pages/Dashboard";
+import IncluirCadastro from "./pages/IncluirCadastro";
+import CadastroDoCliente from "./pages/CadastroDoCliente";
 // components
 import SideMenu from "./components/themes/SideMenu";
 import MainContent from "./components/themes/MainContent";
 import styled from "styled-components";
+import TopBar from "./components/themes/TopBar";
 
 function App() {
   const history = useHistory();
@@ -49,11 +52,14 @@ function App() {
 
   return (
     <AppWrapper>
-      <SideMenu />
+      {authState.status && <SideMenu />}
       <MainContent>
+        {authState.status && <TopBar />}
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/dashboard" component={DashBoard} />
+          <Route exact path="/adicionar" component={IncluirCadastro} />
+          <Route exact path="/cadastro/:id" component={CadastroDoCliente} />
         </Switch>
       </MainContent>
     </AppWrapper>

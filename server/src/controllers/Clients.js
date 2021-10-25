@@ -64,7 +64,7 @@ module.exports = {
 
     // pesquisa
     let condition = search
-      ? { RAZAO_SOCIAL: { [Op.like]: `%${search}%` } }
+      ? { RAZAO_SOCIAL: { [Op.like]: `%${JSON.parse(search).search}%` } }
       : null;
 
     Clients.findAndCountAll({

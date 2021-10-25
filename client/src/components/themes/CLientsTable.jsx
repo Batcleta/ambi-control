@@ -30,6 +30,5 @@ export default CLientsTable;
 const ClientsList = styled.div``;
 const Pagination = styled.div`
   button:nth-child(${({ page }) => page}) {
-    background-color: pink;
   }
 `;

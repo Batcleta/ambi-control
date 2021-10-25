@@ -8,6 +8,7 @@ export default function AuthProvider({ children }) {
     currentPage: 1,
     totalPages: [],
   });
+  const [search, getSearch] = useState();
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
@@ -15,7 +16,13 @@ export default function AuthProvider({ children }) {
     status: false,
   });
   return (
-    <AuthContext.Provider value={{ page, changePage, authState, setAuthState }}>
+    <AuthContext.Provider
+      value={{
+        pages: { page, changePage },
+        authentication: { authState, setAuthState },
+        searchInput: { search, getSearch },
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -23,12 +30,18 @@ export default function AuthProvider({ children }) {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  const { authState, setAuthState } = context;
+  const { authState, setAuthState } = context.authentication;
   return { authState, setAuthState };
 };
 
 export const usePageChange = () => {
   const context = useContext(AuthContext);
-  const { page, changePage } = context;
+  const { page, changePage } = context.pages;
   return { page, changePage };
+};
+
+export const useSearch = () => {
+  const context = useContext(AuthContext);
+  const { search, getSearch } = context.searchInput;
+  return { search, getSearch };
 };

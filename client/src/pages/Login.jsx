@@ -7,15 +7,12 @@ import { useAuth } from "../helpers/AuthContext";
 
 function Login() {
   const history = useHistory();
-  const { authState, setAuthState } = useAuth();
+  const { setAuthState } = useAuth();
   const [loginError, setLoginError] = useState();
 
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
-    control,
     formState: { errors },
   } = useForm();
 
@@ -42,7 +39,7 @@ function Login() {
         <h3>Login</h3>
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
-            <label>username</label>
+            <label>Cu do arthur</label>
             <input
               placeholder="Informe seu usuário"
               {...register(`username`, {
@@ -52,7 +49,7 @@ function Login() {
             {errors?.username && <small>Informe seu nome de usuário</small>}
           </FormGroup>
           <FormGroup>
-            <label>password</label>
+            <label>Senha</label>
             <input
               type="password"
               {...register(`password`, {
@@ -68,7 +65,7 @@ function Login() {
             </>
           )}
 
-          <SubmitButton type="submit">Fazer login</SubmitButton>
+          <SubmitButton type="submit">Entrar</SubmitButton>
         </FormWrapper>
       </LoginContainer>
     </LoginWrapper>
@@ -77,8 +74,36 @@ function Login() {
 
 export default Login;
 
-const LoginWrapper = styled.div``;
-const LoginContainer = styled.div``;
-const FormWrapper = styled.form``;
-const FormGroup = styled.div``;
+const LoginWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+`;
+const LoginContainer = styled.div`
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+
+  display: grid;
+  gap: 1rem;
+
+  box-shadow: 9.9px 11.1px 2.2px rgba(0, 0, 0, -0.01),
+    14.3px 16px 5.3px rgba(0, 0, 0, -0.015),
+    15.9px 17.9px 10px rgba(0, 0, 0, -0.015),
+    16.3px 18.4px 17.9px rgba(0, 0, 0, -0.006),
+    17px 19.1px 33.4px rgba(0, 0, 0, 0.018), 24px 27px 80px rgba(0, 0, 0, 0.07);
+`;
+const FormWrapper = styled.form`
+  display: grid;
+  gap: 1rem;
+`;
+const FormGroup = styled.div`
+  display: grid;
+  gap: 0.3rem;
+
+  input {
+    padding: 0.8rem;
+  }
+`;
 const SubmitButton = styled.button``;
