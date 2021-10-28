@@ -196,7 +196,7 @@ function Dashboard(props) {
 export default Dashboard;
 
 const MainContainer = styled.div`
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 0rem;
   display: grid;
   gap: 2rem;
 `;
@@ -215,7 +215,7 @@ const ClientsContentTable = styled.div``;
 const ClientsContentHeader = styled.div`
   display: grid;
   gap: 2rem;
-  grid-template-columns: 18rem 8rem 5rem 5rem 4rem;
+  grid-template-columns: 18fr 8fr 5fr 5fr 4fr 4fr;
 
   padding: 1rem 1.5rem;
   margin-bottom: 1rem;
@@ -242,7 +242,7 @@ const ClientsContentBody = styled.div`
 const ContentRow = styled.div`
   display: grid;
   gap: 2rem;
-  grid-template-columns: 18rem 8rem 5rem 5rem 4rem auto;
+  grid-template-columns: 18fr 8fr 5fr 5fr 4fr 4fr;
   align-items: center;
 
   padding: 0.8rem 1.5rem;
@@ -295,17 +295,12 @@ const ContentRow = styled.div`
 
 const DeletedModal = styled.div`
   position: fixed;
-  top: calc(-50vh + 50%);
-  bottom: calc(-50vh + 50%);
-  left: calc(-50vw + 50%);
-  right: calc(-50vw + 50%);
-  margin: auto;
-
+  width: 90vw;
+  height: 93vh;
   background: rgba(0, 0, 0, 0.3);
   transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  width: ${({ deleteModal }) => (deleteModal ? " 100vw" : "0vw")};
-  height: ${({ deleteModal }) => (deleteModal ? " 100vh" : "0vw")};
+  visibility: ${({ deleteModal }) => (deleteModal ? " visible" : "hidden")};
   opacity: ${({ deleteModal }) => (deleteModal ? " 1" : "0")};
   transform: ${({ deleteModal }) => (deleteModal ? "scale(1)" : "scale(0)")};
 
