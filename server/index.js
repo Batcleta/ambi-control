@@ -12,7 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rotas
-
 require("./src/routes/index")(app);
 
 // Server
